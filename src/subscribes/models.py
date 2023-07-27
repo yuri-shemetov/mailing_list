@@ -7,6 +7,11 @@ from django.db import models
 
 
 class Subscriber(models.Model):
+    SUBSCRIBER_STATUSES = [
+        ("ON", "Активен"),
+        ("OFF", "Нективен"),
+    ]
+
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -28,6 +33,12 @@ class Subscriber(models.Model):
         null=True,
         blank=True,
         verbose_name="День рождения"
+    )
+    status = models.CharField(
+        max_length=5,
+        default="ON",
+        choices=SUBSCRIBER_STATUSES,
+        verbose_name="Статус"
     )
 
     def __str__(self):

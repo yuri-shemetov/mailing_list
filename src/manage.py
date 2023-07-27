@@ -1,9 +1,17 @@
 #!/usr/bin/env python
 import os
 import sys
+import logging
+
+from proj_settings.settings import DEBUG
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "proj_settings.settings")
+    logging.basicConfig(
+        format="%(levelname)s [%(asctime)s] - %(message)s",
+        level=logging.DEBUG if DEBUG else logging.INFO,
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
