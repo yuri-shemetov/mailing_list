@@ -30,7 +30,7 @@ class MailTemplate(models.Model):
         verbose_name="Наименование шаблона"
     )
     template_path = models.TextField( 
-        help_text="Example:'mails/templates/dummy.html'",
+        help_text="Example:'mails/birthday.html'",
         verbose_name="Путь к шаблону"
     )
     mail_type = models.IntegerField(
@@ -79,7 +79,8 @@ class Mailing(models.Model):
     )
 
     send_date = models.DateTimeField(
-        auto_now_add=True
+        null=True, 
+        blank=True
     )
     status = models.CharField(
         max_length=10, 
@@ -87,6 +88,7 @@ class Mailing(models.Model):
         choices=MAILING_STATUSES,
         verbose_name="Статус"
     )
+    active = models.Manager()
 
     class Meta:
         verbose_name = "Рассылка"
